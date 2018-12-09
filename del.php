@@ -1,0 +1,33 @@
+<?php
+	$billid=$_POST['billid'];
+	$itemname=$_POST['x'];
+	session_start();
+	$link = mysqli_connect("localhost","root","","retail");
+	if(!mysqli_connect_error())
+	{
+		$query = "Select * from effects e,inventory i where e.ItemId = i.ItemId and e.BillId = '$billid' and i.ItemName = '$itemname' ";
+		$res = mysqli_query($link,$query);
+		if(mysqli_num_rows($res) > 0)
+		{
+			$row=mysqli_fetch_array($res);
+			$itemid=$row[1];
+			$itemqty=$row[2];
+			$itemprice=$row[3];
+			$_SESSION['total']=$_SESSION['total']-$itemprice;
+			$query = "Select StkCapacity from stock where ItemId = '$itemid' ";
+			$res = mysqli_query($link,$query);
+			if(mysqli_num_rows($res) > 0)
+			{
+				$row=mysqli_fetch_array($res);
+				$cap=$row[0];
+				$cap=$cap+$itemqty;
+				$_SESSION['totalitems']=$_SESSION['totalitems']-$itemqty;
+				$query = "Update stock set StkCapacity = '$cap' where ItemId = '$itemid' ";
+				$res = mysqli_query($link,$query);
+				$query = "delete from effects where ItemId = '$itemid' and BillId = '$billid' ";
+				$res = mysqli_query($link,$query);
+				echo $_SESSION['total'];
+			}
+		}	
+	}
+?>

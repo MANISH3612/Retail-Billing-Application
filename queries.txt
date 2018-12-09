@@ -1,0 +1,165 @@
+1]TABLE CREATION:
+
+create database Retail;
+use Retail;
+
+
+create table Customer
+(
+CusId int primary key,
+CusName varchar(25) not null,
+CusEmail varchar(50),
+CusMobile char(10) not null,
+CusAddress varchar(100) not null
+);
+
+
+create table Inventory
+(
+ItemId int primary key,
+ItemName varchar(30) not null,
+ItemPrice int not null
+);
+
+
+create table Employee
+(
+EmpId int primary key,
+EmpName varchar(25) not null,
+EmpPassword varchar(30) not null,
+EmpEmail varchar(50),
+EmpMobile char(10) not null,
+EmpAddress varchar(100) not null
+);
+
+
+create table Bill
+(
+BillId int primary key,
+EmpId int references Employee(EmpId) on delete set null,
+CusId int references Customer(CusId) on delete set null,
+TotalItems int not null
+BillDate date,
+BillAmount int
+
+);
+
+create table Payment
+(
+PayId int primary key,
+PayDate date not null,
+PayAmount int not null,
+CusId int references Customer(CusId) on delete set null,
+BillId int references Bill(BillId) on delete cascade
+);
+
+create table Stock
+(
+ItemId int references Inventory(ItemId) on delete cascade,
+StkCapacity int not null,
+MaxStkCapacity int not null
+);
+ 
+create table Effects
+(
+BillId int references Bill(BillId) on delete cascade,
+ItemId int references Inventory(ItemId) on delete set null,
+ItemQty int not null,
+primary key(BillId,ItemId)
+);
+
+create table Type
+(
+PayId int references Payment(PayId) on delete cascade,
+PayType varchar(20),
+Amount int not null,
+primary key(PayId,PayType)
+);
+
+create table temp
+(
+TDate date,
+ItemName varchar(30),
+Qty int
+primary key(TDate,ItemName,Qty)
+);
+alter table bill add constraint fk1 foreign key(EmpId) references employee(EmpId) on delete set null ;
+alter table bill add constraint fk2 foreign key(CusId) references customer(CusId) on delete set null ;
+alter table customer modify CusMobile number not null;
+alter table stock add constraint fk3 foreign key(ItemId) references inventory(ItemId) on delete cascade ;
+alter table stock ADD CHECK (MaxStkCapacity>StkCapacity);
+alter table inventory modify column ItemName varchar(50);
+alter table stock ADD CHECK (StkCapacity>0.2*MaxStkCapacity);
+
+2]HIGHEST BUYING CUSTOMER:
+
+create view view1 as
+select sum(BillAmount) as billsum,CusId from bill group by CusId;
+
+select c.CusId,CusName from customer c,view1 v
+where c.CusId=v.CusId
+order by billsum DESC;
+
+
+3]LOWEST BUYING CUSTOMER:
+
+create view view2 as
+select sum(BillAmount) as billsum,CusId from bill group by CusId;
+
+select c.CusId,CusName from customer c,view1 v
+where c.CusId=v.CusId
+order by billsum ASC;
+
+4]HIGHEST PAYMENT TYPE USED:
+
+select PayType,sum(Amount) as paysum from type group by PayType order by sum(amount) DESC;
+
+5]LOWEST PAYMENT TYPE USED:
+
+select PayType,sum(Amount) as paysum from type group by PayType order by sum(amount);
+
+6]HIGHEST ITEM:
+
+select i.ItemId,ItemName from effects e,inventory i group by ItemId order by ItemQty where i.ItemId=e.ItemId;
+
+create view view3 as
+select ItemId,ItemQty from effects group by ItemId;
+
+select i.ItemId,ItemName from inventory i,view3 v
+where i.ItemId=v.ItemId
+order by ItemQty DESC;
+
+7]LOWEST ITEM:
+
+select i.ItemId,ItemName from inventory i,view3 v
+where i.ItemId=v.ItemId
+order by ItemQty;
+
+8]TRIGGER:
+
+DELIMITER @@;
+CREATE DEFINER=`root`@`localhost` TRIGGER `MinStockU` BEFORE UPDATE ON `stock` FOR EACH ROW  
+BEGIN 
+if(new.StkCapacity<=0.2*(old.MaxStkCapacity)) then
+set @qty=old.MaxStkCapacity-old.StkCapacity;
+set new.StkCapacity=old.MaxStkCapacity;
+select ItemName into @itemname from stock s,inventory i where s.ItemId=i.ItemId and s.ItemId=new.ItemId;
+call myproc(@qty,@itemname);
+end if;
+END;
+@@;
+DELIMITER ;
+
+9]PROCEDURE:
+
+DELIMITER @@;
+CREATE OR REPLACE DEFINER=`root`@`localhost` PROCEDURE myproc(IN qty int,IN itemname varchar(50)) 
+BEGIN 
+insert into temp values( SYSDATE(),itemname,qty); 
+END;
+@@;
+DELIMITER ;
+
+
+
+
