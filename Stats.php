@@ -24,7 +24,7 @@
 			$end = "</tbody></table>";
 			$stat1 = $start.$ret.$end;	
 		}
-		$query ="select i.ItemId,ItemName from inventory i,view2 v where i.ItemId=v.ItemId order by ItemQty DESC ";
+		$query ="select i.ItemId,ItemName from inventory i,view3 v where i.ItemId=v.ItemId order by ItemQty DESC ";
 		$res = mysqli_query($link,$query);
 		$count = mysqli_num_rows($res);
 		if($count > 0)
@@ -78,7 +78,7 @@
 			$end = "</tbody></table>";
 			$stat4 = $start.$ret.$end;		
 		}
-		$query ="select i.ItemId,ItemName from inventory i,view2 v where i.ItemId=v.ItemId order by ItemQty ASC ";
+		$query ="select i.ItemId,ItemName from inventory i,view3 v where i.ItemId=v.ItemId order by ItemQty ASC ";
 		$res = mysqli_query($link,$query);
 		$count = mysqli_num_rows($res);
 		if($count > 0)
@@ -143,7 +143,12 @@
 		<style type="text/css">
 			body {
 				margin-top:20px;
-				background-color:#723EBF;
+				background-color:#0C3054;
+				background-image: url("Image/bg.png");
+		    height: 100%; 
+		    background-position: center;
+		    background-repeat: no-repeat;
+		    background-size: cover;
 			}
 			#gap {
 				margin-bottom:10px;
@@ -152,6 +157,14 @@
 				float:right;
 				font-size:175%;
 				color:white;
+			}
+			.card-header
+			{
+				color:white;
+				background-image:radial-gradient(circle,#9575af,#3a254c);
+			}
+			.card-body{
+				background-image:radial-gradient(circle,#fff,#785A8F); 
 			}
 		</style>
 

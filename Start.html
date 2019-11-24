@@ -5,33 +5,243 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 		
-	<script>
-		window.location.hash="no-back-button";
-		window.location.hash="Again-No-back-button";
-		window.onhashchange=function(){window.location.hash="no-back-button";}
-	</script>
+	
 		
 		<title>Start Up</title>
 		
 		<style type="text/css">
-			.center {
+		@import url(https://fonts.googleapis.com/css?family=EB+Garamond|Cardo:400italic);
+
+		body {
+		    margin: 0;
+		    background-image: url("Img9.jpg");
+		    height: 100%; background-position: center;
+		    background-repeat: no-repeat;
+		    background-size: cover;
+		    background-color: #5774b8;
+
+		}
+
+		.sandbox-correct-pronounciation {
+		  padding: 10em 0 10em 0;
+		}
+		.heading-correct-pronounciation {
+
+		  margin: auto;
+		  text-align: center;
+		  position: relative;
+		}
+
+		h1 {
+		  color: #FDF788;
+		  font-family: 'Cardo', serif;
+		  font-size: 1.5em;
+		  font-weight: normal;
+		  font-style: italic;
+		  letter-spacing: 0.1em;
+		  line-height: 2.2em;
+		  position: relative;
+		  bottom:150px;
+		}
+		em {
+		  font-family: 'EB Garamond', serif;
+		  font-size: 3.5em;
+		  text-transform: uppercase;
+		  letter-spacing: 1px;
+		  display: block;
+		  font-style:normal;
+		  padding-top: 0.1em;
+		  text-shadow: 0.07em 0.07em 0 rgba(0, 0, 0, 0.1);
+		  
+		  &::before, &::after {
+		  content: "§";
+		  display: inline-block;
+		  -webkit-transform: rotate(90deg);
+		  -moz-transform: rotate(90deg);
+		  -o-transform: rotate(90deg);
+		  -ms-transform: rotate(90deg);
+		  transform: rotate(90deg);
+		    opacity: 0.2;
+		  margin: 1px;
+		  font-size: 0.5em;
+		}
+
+		}
+
+		.bottom {
+		  font-size: 1.5em;
+		  letter-spacing: 0.07em;
+		  font-size: 1em;
+		  display: block;
+		}
+
+		@import url(https://fonts.googleapis.com/css?family=Lato:900);
+
+		*, *:before, *:after{
+		  box-sizing:border-box;
+		}
+		body{
+		  font-family: 'Lato', sans-serif;
+		    ;
+		}
+		
+		.letter{
+		  display: inline-block;
+		  font-weight: 900;
+		  font-size: 80px;
+		  margin: 0.1px;
+		  position: relative;
+		  color: #5774b8;
+		  transform-style: preserve-3d;
+		  perspective: 400;
+		  z-index: 1;
+		}
+		.letter:before, .letter:after{
+		  position:absolute;
+		  content: attr(data-letter);
+		  transform-origin: top left;
+		  top:0;
+		  left:0;
+		}
+		.letter, .letter:before, .letter:after{
+		  transition: all 0.001s ease-in-out;
+		}
+		.letter:before{
+		  color: #fff;
+		  text-shadow: 
+		    -1px 0px 1px rgba(255,255,255,.8),
+		    1px 0px 1px rgba(0,0,0,.8);
+		  z-index: 3;
+		  transform:
+		    rotateX(0deg)
+		    rotateY(-15deg)
+		    rotateZ(0deg);
+		}
+		.letter:after{
+		  color: rgba(0,0,0,.11);
+		  z-index:2;
+		  transform:
+		    scale(1.08,1)
+		    rotateX(0deg)
+		    rotateY(0deg)
+		    rotateZ(0deg)
+		    skew(0deg,1deg);
+		}
+		.letter:hover:before{
+		  color: #fafafa;
+		  transform:
+		    rotateX(0deg)
+		    rotateY(-45deg)
+		    rotateZ(0deg);
+		}
+		.letter:hover:after{
+		  transform:
+		    scale(1.08,1)
+		    rotateX(0deg)
+		    rotateY(45deg)
+		    rotateZ(0deg)
+		    skew(0deg,22deg);
+		}
+		.center {
 				text-align:center;
-			}
-			#one {
-				font-size:150%;
-			}
+		}
+		#one {
+			font-size:150%;
+		}
+		:root {
+		  --button-color: white;
+		  --button-background-color1: #0C3054;
+		  --button-background-color2: #0C3054;
+		  --cursor: pointer;
+		  --border-radius: 5px;
+		  --border-radius1: 50%;
+			--height: 30px;
+			--width: 95px;
+			--line-height: 30px;
+			--ext-align: center;
+			--transition-property: background, border-radius;
+			--transition-duration: .2s, .5s;
+			--transition-timing-function: linear, ease-in;
+		}
+		.btn-primary {
+		    color: var(--button-color);
+		    background-color: var(--button-background-color1);
+		    border-radius: var(--border-radius);
+		    cursor: var(--cursor)
+		    height:var(--height);
+			width:var(--width);
+			line-height:var(--line-height);
+			ext-align:var(--ext-align);
+			transition-property:var(--transition-property);
+			transition-duration:var(--transition-duration);
+			transition-timing-function:var(--transition-timing-function);
+
+		}
+
+		.btn-primary:hover {
+		    background-color: var(--button-background-color2);
+		    border-radius: var(--border-radius1);
+		}
+		h1:hover {
+            color: #ffff00;
+		}
+
+		.typewriter-text {
+		    display: inline-block;
+		  	overflow: hidden;
+		  	letter-spacing: 2px;
+		 	animation: typing 5s steps(30, end), blink .75s step-end infinite;
+		    white-space: nowrap;
+		    box-sizing: border-box;
+		}
+
+		@keyframes typing {
+		    from { 
+		        width: 0% 
+		    }
+		    to { 
+		        width: 30%
+		    }
+		}
+
+		
 		</style>
 	</head>
 <body>
-    
-	<div class="jumbotron">
-		<h1 class="display-4 center">Retail Billing Application</h1>
-		<p class="lead"></p>
-		<hr class="my-4">
-		<p class="center" id="one">One Stop Hassle Free Billing!</p>
-		<div class="center"><a class="btn btn-primary btn-lg" href="http://localhost/NewFolder/Login.php" role="button">Login</a></div>
-	</div>
-	
+    <center>
+	  <em><p class="letter" data-letter="R">R</p>
+	  <p class="letter" data-letter="E">E</p>
+	  <p class="letter" data-letter="T">T</p>
+	  <p class="letter" data-letter="A">A</p>
+	  <p class="letter" data-letter="I">I</p>
+	  <p class="letter" data-letter="L">L</p>
+	  <p class="letter" data-letter="&nbsp;">&nbsp;</p>
+	  <p class="letter" data-letter="B">B</p>
+	  <p class="letter" data-letter="I">I</p>
+	  <p class="letter" data-letter="L">L</p>
+	  <p class="letter" data-letter="L">L</p>
+	  <p class="letter" data-letter="I">I</p>
+	  <p class="letter" data-letter="N">N</p>
+	  <p class="letter" data-letter="G">G</p>
+	  <p class="letter" data-letter="&nbsp;">&nbsp;</p>
+	  <br>
+	  <p class="letter" data-letter="A">A</p>
+	  <p class="letter" data-letter="P">P</p>
+	  <p class="letter" data-letter="P">P</p>
+	  <p class="letter" data-letter="L">L</p>
+	  <p class="letter" data-letter="I">I</p>
+	  <p class="letter" data-letter="C">C</p>
+	  <p class="letter" data-letter="A">A</p>
+	  <p class="letter" data-letter="T">T</p>
+	  <p class="letter" data-letter="I">I</p>
+	  <p class="letter" data-letter="O">O</p>
+	  <p class="letter" data-letter="N">N</p></em>
+	</center>
+	<div class="sandbox sandbox-correct-pronounciation">
+	<h1 class="heading heading-correct-pronounciation">
+		<p class="typewriter-text">One Stop Hassle Free Billing!</p>
+	</h1>
+	<div class="center"><a class="btn btn-primary " href="http://localhost/NewFolder/Login.php" role="button">Login</a></div></div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>

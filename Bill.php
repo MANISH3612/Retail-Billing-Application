@@ -97,15 +97,15 @@
 			}
 			.height {
 				height:60px;
-				background-color:#BDFFFE;
+				background-color:#F8D7DA;
 			}
 			.height2 {
 				height:120px;
-				background-color:#F7BE40
+				background-color:#F3F3F3;
 			}
 			#height1 {
 				min-height:300px;
-				background-color:#F8F038;
+				background-color:#F3F3F3;
 			}
 			#proceed {
 				margin-top:10px;
@@ -131,8 +131,73 @@
 			#btn1 {
 				display:none;
 			}
+			.col-sm-4 {
+				background-color:white;
+				background-image:radial-gradient(circle,#B09CCA,#3E1E4F); 
+			}
+			#empd {
+				background-color:white;
+				background-image:radial-gradient(circle,#fff,#785A8F); 
+			}
+			.col-sm-8 {
+				background-color:white;
+				background-image:radial-gradient(circle,#fff,#785A8F); 
+			}
+			#shopn {
+				background-color:white;
+				background-image:radial-gradient(circle,#B09CCA,#3E1E4F); 
+			}
+			#itemq {
+				background-color:white;
+				background-image:radial-gradient(circle,#B09CCA,#3E1E4F); 
+			}
 			body {
-				background-color:#F099F0;
+				background-color:#0C3054;
+				margin: 0;
+		    background-image: url("Image/bg.png");
+		    height: 100%; 
+		    background-position: center;
+		    background-repeat: no-repeat;
+		    background-size: cover;
+			}
+			:root {
+			  --button-color: white;
+			  --button-background-color1:#007bff;
+			  --button-background-color2:346499;
+			  --button-background-color3:#C82333;
+			  --button-background-color4:962831;
+			  --button-background-color5:#E0A800;
+			  --button-background-color6:#b78e14;
+			  --cursor: pointer;
+			  --border-radius: 5px;
+			  --border-radius1: 50%;
+				--height: 25px;
+				--width: 210px;
+				--line-height: 25px;
+				--ext-align: center;
+				--transition-property: background, border-radius;
+				--transition-duration: .2s, .5s;
+				--transition-timing-function: linear, ease-in;
+			}
+			.btn-primary {
+			    color: var(--button-color);
+			    background-color: var(--button-background-color1);
+			    border-radius: var(--border-radius);
+			    cursor: var(--cursor)
+			    height:var(--height);
+				width:var(--width);
+				line-height:var(--line-height);
+				ext-align:var(--ext-align);
+				transition-property:var(--transition-property);
+				transition-duration:var(--transition-duration);
+				transition-timing-function:var(--transition-timing-function);
+				box-shadow:  0 0 20px black ;
+
+			}
+
+			.btn-primary:hover {
+			    background-color: var(--button-background-color2);
+			    border-radius: var(--border-radius1);
 			}
 		</style>
 
@@ -146,7 +211,7 @@
 			<div class="col-sm-3"><a href="http://localhost/NewFolder/Dashboard.php" id="one">Dashboard</a></div>
 		</div>
 		<div class="row border height">
-			<div class="col-sm-8 center1">
+			<div class="col-sm-8 center1" id="shopn">
 				<?php echo $result; ?>
 			</div>
 			<div class="col-sm-4 center1 border1">
@@ -155,7 +220,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-sm-3 border height2 padding center1">
+			<div class="col-sm-3 border height2 padding center1" id="empd">
 				<?php echo $result1; ?>
 			</div>
 			<div class="col-sm-1"></div>
@@ -168,7 +233,7 @@
 				</form>
 			</div>
 		</div>
-		<div class="row border height padding">
+		<div class="row border height padding" id="itemq">
 			<form method="post" id="myform1">
 					<label for="item">Item Name<sup>* </sup></label>
 					<select name="item_name" id="item"><?php echo $select; ?></select>

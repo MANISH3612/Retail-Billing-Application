@@ -45,16 +45,25 @@
 		<style type="text/css">
 			body {
 				margin:20px;
-				background-color:#6A5ACD;
+				background-color:#0C3054;
+		    background-image: url("Image/bg.png");
+		    height: 100%; 
+		    background-position: center;
+		    background-repeat: no-repeat;
+		    background-size: cover;
 			}
 			.card {
 				margin:0 auto;
 			}
 			.card-header {
 				text-align:center;
-				background-color:#EFF0F1;
-				color:red;
+				background-color:#F8D7DA;
+				color:white;
 				font-size:150%;
+				background-image:radial-gradient(circle,#9575af,#3a254c);
+			}
+			.card-body{
+				background-image:radial-gradient(circle,#fff,#785A8F); 
 			}
 			#gap {
 				margin-bottom:30px;
@@ -76,7 +85,7 @@
 			<div class="col-sm-3"><a href="http://localhost/NewFolder/Dashboard.php" id="one">Dashboard</a></div>
 		</div>
 		<div class="card border-success mb-3" style="width:75%;">
-			<div class="card-header">Purchase Order</div>
+			<div class="card-header">Stock Order</div>
 			<div class="card-body text-success">
 				<p class="card-text"><?php echo $ret;?></p>
 			</div>
